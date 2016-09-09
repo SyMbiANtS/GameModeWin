@@ -35,10 +35,7 @@ namespace GameModeWin
 
         public void defenderOff()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software", true);
-            servicePath = servicePath.OpenSubKey("Policies", true);
-            servicePath = servicePath.OpenSubKey("Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows Defender", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
 
             servicePath.SetValue("DisableAntiSpyware", 1);
             servicePath.Close();
@@ -46,10 +43,7 @@ namespace GameModeWin
 
         public void defenderOn()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software", true);
-            servicePath = servicePath.OpenSubKey("Policies", true);
-            servicePath = servicePath.OpenSubKey("Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows Defender", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
 
             servicePath.DeleteValue("DisableAntiSpyware");
             servicePath.Close();
@@ -62,10 +56,8 @@ namespace GameModeWin
 
         public void defLocalOverON()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows Defender", true);
-            servicePath = servicePath.OpenSubKey("Real-Time Protection", true);
-
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection", true);
+            
             servicePath.SetValue("LocalSettingOverrideDisableBehaviorMonitoring", 1);
             servicePath.SetValue("LocalSettingOverrideDisableOnAccessProtection", 1);
             servicePath.SetValue("LocalSettingOverrideDisableRealtimeMonitoring", 1);
@@ -75,10 +67,7 @@ namespace GameModeWin
 
         public void defLocalOverOFF()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows Defender", true);
-            servicePath = servicePath.OpenSubKey("Real-Time Protection", true);
-
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection", true);
         
             servicePath.DeleteValue("LocalSettingOverrideDisableBehaviorMonitoring");
             servicePath.DeleteValue("LocalSettingOverrideDisableOnAccessProtection");
@@ -93,8 +82,8 @@ namespace GameModeWin
 
         public void updateOff()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software", true);
-            servicePath = servicePath.OpenSubKey("Policies\\Microsoft\\Windows", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+            
             servicePath = servicePath.OpenSubKey("WindowsUpdate\\AU", true);
 
             servicePath.SetValue("NoAutoUpdate", 1);
@@ -103,8 +92,7 @@ namespace GameModeWin
 
         public void updateOn()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
-            servicePath = servicePath.OpenSubKey("WindowsUpdate\\AU", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU", true);
 
             servicePath.DeleteValue("NoAutoUpdate");
             servicePath.Close();
@@ -117,29 +105,25 @@ namespace GameModeWin
         public void updateStoreOff()
         {
             RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
-            servicePath = servicePath.OpenSubKey("WindowsStore", true);
-
-            if (servicePath == null)
+            
+            if (servicePath.OpenSubKey("WindowsStore") == null)
             {
                 servicePath.Close();
                 RegistryKey sp = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
                 sp = sp.CreateSubKey("WindowsStore");
                 servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
-                servicePath = servicePath.OpenSubKey("WindowsStore", true);
             }
 
-            servicePath.SetValue("AutoDownload", "2");
+            servicePath = servicePath.OpenSubKey("WindowsStore", true);
+            servicePath.SetValue("AutoDownload", 2);
             servicePath.Close();
         }
 
         public void updateStoreOn()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software", true);
-            servicePath = servicePath.OpenSubKey("Policies\\Microsoft\\Windows", true);
-            servicePath = servicePath.OpenSubKey("WindowsUpdate", true);
-            servicePath = servicePath.OpenSubKey("AU", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\WindowsStore", true);
 
-            servicePath.DeleteValue("NoAutoUpdate");
+            servicePath.DeleteValue("AutoDownload");
             servicePath.Close();
         }
 
@@ -148,18 +132,17 @@ namespace GameModeWin
 
         public void notifyOff()
         {
-            RegistryKey servicePath = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows\\CurrentVersion", true);
-            servicePath = servicePath.OpenSubKey("PushNotifications", true);
-            if (servicePath == null)
+            RegistryKey servicePath = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\CurrentVersion", true);
+            
+            if (servicePath.OpenSubKey("PushNotifications") == null)
             {
                 servicePath.Close();
                 RegistryKey sp = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft", true);
                 sp = sp.OpenSubKey("Windows\\CurrentVersion", true);
                 sp = sp.CreateSubKey("PushNotifications");
-                servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
-                servicePath = servicePath.OpenSubKey("Windows\\CurrentVersion\\PushNotifications", true);
+                servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\CurrentVersion", true);
             }
+            servicePath = servicePath.OpenSubKey("PushNotifications", true);
 
             servicePath.SetValue("NoTileApplicationNotification", 1);
             servicePath.SetValue("NoToastApplicationNotification", 1);
@@ -168,9 +151,7 @@ namespace GameModeWin
 
         public void notifyOn()
         {
-            RegistryKey servicePath = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft", true);
-            servicePath = servicePath.OpenSubKey("Windows\\CurrentVersion", true);
-            servicePath = servicePath.OpenSubKey("PushNotifications", true);
+            RegistryKey servicePath = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications", true);
 
             servicePath.DeleteValue("NoToastApplicationNotification");
             servicePath.DeleteValue("NoTileApplicationNotification");
@@ -183,8 +164,7 @@ namespace GameModeWin
 
         public void indxOff()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet\\Services\\WSearch", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\WSearch", true);
 
             servicePath.SetValue("Start", 4);
             servicePath.Close();
@@ -192,8 +172,7 @@ namespace GameModeWin
 
         public void indxOn()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet\\Services\\WSearch", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\WSearch", true);
 
             servicePath.SetValue("Start", 2);
             servicePath.Close();

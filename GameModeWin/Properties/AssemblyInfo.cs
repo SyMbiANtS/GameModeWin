@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GameModeWinX")]
-[assembly: AssemblyDescription("Game Mode for windpws 10")]
+[assembly: AssemblyDescription("Game Mode for windows |x|")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Symbiants")]
 [assembly: AssemblyProduct("GameMode")]

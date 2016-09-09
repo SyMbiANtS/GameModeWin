@@ -12,10 +12,9 @@
                 <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="174" Background="#FF111723">
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Registry Values"/>
                     <CheckBox x:Name="cb101" Foreground="#FF5CCCDE" Content="Disable Superfetch" IsChecked="True"/>
-
-                    <CheckBox x:Name="cb102" Foreground="#FF5CCCDE" Content="Disable Boottrace" IsChecked="True"/>
                     <CheckBox x:Name="cb103" Foreground="#FF5CCCDE" Content="Set UDP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb104" Foreground="#FF5CCCDE" Content="Set TCP Params" IsChecked="True"/>
+                    <CheckBox x:Name="cb102" Foreground="#FF5CCCDE" Content="Set TCP NoDelay" IsChecked="True"/>
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Services Values"/>
                     <CheckBox x:Name="cb105" Foreground="#FF5CCCDE" Content="Disable Notifications" IsChecked="True"/>
                     <CheckBox x:Name="cb106" Foreground="#FF5CCCDE" Content="Disable Update" IsChecked="True"/>
@@ -27,10 +26,9 @@
                 <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="242" Margin="201,10,0,0" VerticalAlignment="Top" Width="171" Background="#FF14231A">
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Registry Values"/>
                     <CheckBox x:Name="cb201" Foreground="#FF5CDEA3" Content="Disable Superfetch" IsChecked="True"/>
-
-                    <CheckBox x:Name="cb202" Foreground="#FF5CDEA3" Content="Disable Boottrace" IsChecked="True"/>
                     <CheckBox x:Name="cb203" Foreground="#FF5CDEA3" Content="Set UDP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb204" Foreground="#FF5CDEA3" Content="Set TCP Params" IsChecked="True"/>
+                    <CheckBox x:Name="cb202" Foreground="#FF5CDEA3" Content="Set TCPNoDelay" IsChecked="True"/>
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Services Values"/>
                     <CheckBox x:Name="cb205" Foreground="#FF5CDEA3" Content="Disable Notifications" IsChecked="True"/>
                     <CheckBox x:Name="cb206" Foreground="#FF5CDEA3" Content="Disable Update" IsChecked="True"/>

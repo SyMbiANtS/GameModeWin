@@ -33,20 +33,12 @@ namespace GameModeWin
 
         public void unsetFetch()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System", true);
-            keyPath = keyPath.OpenSubKey("CurrentControlSet", true);
-            keyPath = keyPath.OpenSubKey("Control", true);
-            keyPath = keyPath.OpenSubKey("Session Manager", true);
-            keyPath = keyPath.OpenSubKey("Memory Management", true);
-            keyPath = keyPath.OpenSubKey("PrefetchParameters", true);
+            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters", true);
 
             keyPath.SetValue("EnablePrefetcher", 3);
             keyPath.SetValue("EnableSuperfetch", 1);
 
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("SysMain", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\SysMain", true);
 
             servicePath.SetValue("Start", 3);
             servicePath.Close();
@@ -63,12 +55,7 @@ namespace GameModeWin
 
         public void setCacheUDP()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("Dnscache", true);
-            servicePath = servicePath.OpenSubKey("Parameters", true);
-
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Dnscache\\Parameters", true);
 
             servicePath.SetValue("NegativeCacheTime", 0);
             servicePath.SetValue("NegativeSOACacheTime", 0);
@@ -80,11 +67,7 @@ namespace GameModeWin
 
         public void unsetCacheUDP()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("Dnscache", true);
-            servicePath = servicePath.OpenSubKey("Parameters", true);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Dnscache\\Parameters", true);
 
             servicePath.SetValue("NegativeCacheTime", 600);
             servicePath.SetValue("NegativeSOACacheTime", 300);
@@ -100,21 +83,13 @@ namespace GameModeWin
 
         public void setTCPNodelay()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath = keyPath.OpenSubKey("Microsoft", true);
-            keyPath = keyPath.OpenSubKey("Windows NT", true);
-            keyPath = keyPath.OpenSubKey("CurrentVersion", true);
-            keyPath = keyPath.OpenSubKey("Multimedia", true);
-            keyPath = keyPath.OpenSubKey("SystemProfile", true);
+            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
             keyPath.SetValue("NetworkThrottlingIndex", "ffffffff", RegistryValueKind.DWord);
-            keyPath.SetValue("SystemResponsiveness", "0");
+            keyPath.SetValue("SystemResponsiveness", 0);
             keyPath.Close();
 
-            RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath1 = keyPath1.OpenSubKey("Microsoft", true);
-            keyPath1 = keyPath1.OpenSubKey("MSMQ", true);
-            keyPath1 = keyPath1.OpenSubKey("Parameters", true);
+            RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\MSMQ\\Parameters", true);
             
             keyPath1.SetValue("TcpNoDelay", 1);
             keyPath1.Close();
@@ -123,20 +98,13 @@ namespace GameModeWin
 
         public void unsetTCPNodelay()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath = keyPath.OpenSubKey("Microsoft", true);
-            keyPath = keyPath.OpenSubKey("Windows NT", true);
-            keyPath = keyPath.OpenSubKey("CurrentVersion", true);
-            keyPath = keyPath.OpenSubKey("Multimedia", true);
-            keyPath = keyPath.OpenSubKey("SystemProfile", true);
+            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
             keyPath.SetValue("NetworkThrottlingIndex", 10);
             keyPath.SetValue("SystemResponsiveness", 14);
+            keyPath.Close();
 
-            RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath1 = keyPath1.OpenSubKey("Microsoft", true);
-            keyPath1 = keyPath1.OpenSubKey("MSMQ", true);
-            keyPath1 = keyPath1.OpenSubKey("Parameters", true);
+            RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\MSMQ\\Parameters", true);
 
             keyPath1.SetValue("TcpNoDelay", 0);
             keyPath1.Close();
@@ -149,20 +117,16 @@ namespace GameModeWin
 
         public void setTCPIP()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System", true);
-            keyPath = keyPath.OpenSubKey("CurrentControlSet", true);
-            keyPath = keyPath.OpenSubKey("Services", true);
-            keyPath = keyPath.OpenSubKey("Tcpip", true);
-            keyPath = keyPath.OpenSubKey("Parameters", true);
+            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Tcpip\\Parameters", true);
 
-            keyPath.SetValue("DefaultTTL", "40", RegistryValueKind.DWord);
+            keyPath.SetValue("DefaultTTL", 40);
             keyPath.SetValue("KeepAliveTime", "493E0", RegistryValueKind.DWord); //300 000 ms = 5min
-            keyPath.SetValue("MaxUserPort", 65534);
-            keyPath.SetValue("QualifyingDestinationThreshold", "3", RegistryValueKind.DWord);
-            keyPath.SetValue("SynAttackProtect", "1", RegistryValueKind.DWord);
-            keyPath.SetValue("Tcp1323Opts", "1", RegistryValueKind.DWord);
-            keyPath.SetValue("TcpCreateAndConnectTcbRateLimitDepth", "0", RegistryValueKind.DWord);
-            keyPath.SetValue("TcpMaxDataRetransmissions", "5", RegistryValueKind.DWord);
+            keyPath.SetValue("MaxUserPort", 65534, RegistryValueKind.DWord);
+            keyPath.SetValue("QualifyingDestinationThreshold", 3);
+            keyPath.SetValue("SynAttackProtect", 1);
+            keyPath.SetValue("Tcp1323Opts", 1);
+            keyPath.SetValue("TcpCreateAndConnectTcbRateLimitDepth", 0);
+            keyPath.SetValue("TcpMaxDataRetransmissions", 5);
             
             keyPath.Close();
 
@@ -172,20 +136,16 @@ namespace GameModeWin
 
         public void unsetTCPIP()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System", true);
-            keyPath = keyPath.OpenSubKey("CurrentControlSet", true);
-            keyPath = keyPath.OpenSubKey("Services", true);
-            keyPath = keyPath.OpenSubKey("Tcpip", true);
-            keyPath = keyPath.OpenSubKey("Parameters", true);
+            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Tcpip\\Parameters", true);
 
-            keyPath.SetValue("DefaultTTL", "128", RegistryValueKind.DWord);
+            keyPath.SetValue("DefaultTTL", 128, RegistryValueKind.DWord);
             keyPath.SetValue("KeepAliveTime", "6DDD00", RegistryValueKind.DWord);
-            keyPath.SetValue("MaxUserPort", 5000);
-            keyPath.SetValue("QualifyingDestinationThreshold", "3", RegistryValueKind.DWord);
-            keyPath.SetValue("SynAttackProtect", "0", RegistryValueKind.DWord);
-            keyPath.SetValue("Tcp1323Opts", "3", RegistryValueKind.DWord);
-            keyPath.SetValue("TcpCreateAndConnectTcbRateLimitDepth", "1", RegistryValueKind.DWord);
-            keyPath.SetValue("TcpMaxDataRetransmissions", "5", RegistryValueKind.DWord);
+            keyPath.SetValue("MaxUserPort", 5000, RegistryValueKind.DWord);
+            keyPath.SetValue("QualifyingDestinationThreshold", 3, RegistryValueKind.DWord);
+            keyPath.SetValue("SynAttackProtect", 0, RegistryValueKind.DWord);
+            keyPath.SetValue("Tcp1323Opts", 3, RegistryValueKind.DWord);
+            keyPath.SetValue("TcpCreateAndConnectTcbRateLimitDepth", 1, RegistryValueKind.DWord);
+            keyPath.SetValue("TcpMaxDataRetransmissions", 5, RegistryValueKind.DWord);
 
             keyPath.Close();
         }
