@@ -38,6 +38,82 @@ namespace GameModeWin
             unsetTime();
         }
 
+        private void createRegSettings()
+        {
+
+
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System", true);
+            keySettings.OpenSubKey("GameConfigStore", true);
+            if (keySettings.GetValue("GameMode") == null)
+            {
+                keySettings.CreateSubKey("GameMode");
+            }
+            keySettings.OpenSubKey("GameMode", true);
+
+
+            if (keySettings.GetValue("Superfetch").Equals("1"))
+            {
+                cb101.IsChecked = true ;
+                cb201.IsChecked = true;
+            }
+            
+            if (keySettings.GetValue("udpCache").Equals("1"))
+            {
+                cb103.IsChecked = true;
+                cb203.IsChecked = true;
+            }
+
+            if (keySettings.GetValue("tcpParam").Equals("1"))
+            {
+                cb104.IsChecked = true;
+                cb204.IsChecked = true;
+            }
+            if (keySettings.GetValue("TimeBroker").Equals("1"))
+            {
+                cb107.IsChecked = true;
+                cb207.IsChecked = true;
+            }
+           
+        }
+
+        private void writeRegSettings()
+        {
+
+
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System", true);
+            keySettings.OpenSubKey("GameConfigStore", true);
+            if (keySettings.GetValue("GameMode") == null)
+            {
+                keySettings.CreateSubKey("GameMode");
+            }
+            keySettings.OpenSubKey("GameMode", true);
+
+
+            if (keySettings.GetValue("Superfetch").Equals("1"))
+            {
+                cb101.IsChecked = true;
+                cb201.IsChecked = true;
+            }
+
+            if (keySettings.GetValue("udpCache").Equals("1"))
+            {
+                cb103.IsChecked = true;
+                cb203.IsChecked = true;
+            }
+
+            if (keySettings.GetValue("tcpParam").Equals("1"))
+            {
+                cb104.IsChecked = true;
+                cb204.IsChecked = true;
+            }
+            if (keySettings.GetValue("TimeBroker").Equals("1"))
+            {
+                cb107.IsChecked = true;
+                cb207.IsChecked = true;
+            }
+
+        }
+
 
         /// <summary>
         /// Set Superfetch and Prefetch + Service
@@ -132,7 +208,7 @@ namespace GameModeWin
             servicePath.SetValue("NegativeCacheTime", "0");
             servicePath.SetValue("NegativeSOACacheTime", "0");
             servicePath.SetValue("NetFailureCacheTime", "0");
-            servicePath.SetValue("MaximumUdpPacketSize", "1300");
+            servicePath.SetValue("MaximumUdpPacketSize", "512");
 
             servicePath.Close();
         }
@@ -145,10 +221,10 @@ namespace GameModeWin
             servicePath = servicePath.OpenSubKey("Dnscache", true);
             servicePath = servicePath.OpenSubKey("Parameters", true);
 
-            servicePath.SetValue("NegativeCacheTime", "0");
-            servicePath.SetValue("NegativeSOACacheTime", "0");
-            servicePath.SetValue("NetFailureCacheTime", "0");
-            servicePath.SetValue("MaximumUdpPacketSize", "1300");
+            servicePath.SetValue("NegativeCacheTime", "600");
+            servicePath.SetValue("NegativeSOACacheTime", "300");
+            servicePath.SetValue("NetFailureCacheTime", "120");
+            servicePath.SetValue("MaximumUdpPacketSize", "1472");
 
             servicePath.Close();
         }
@@ -184,6 +260,11 @@ namespace GameModeWin
         }
 
 
+        ///disable firewall
+        /// [HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile]
+        /// "EnableFirewall" = dword:00000000
+
+
         /// <summary>
         /// Site links mouse dbl click
         /// </summary>
@@ -207,6 +288,11 @@ namespace GameModeWin
         private void Steam2Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             System.Diagnostics.Process.Start("http://steamcommunity.com/sharedfiles/filedetails/?id=476760198"); 
+        }
+
+        private void bReboot_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("shutdown.exe", "-r -t 0");
         }
     }
 }
