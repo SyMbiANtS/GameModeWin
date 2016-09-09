@@ -8,3 +8,5 @@ i'll publish it in github and you'll be able to change those keys yourself
 windows 10 optimization for gaming || оптимизация windows 10 для игр
 В общем винда тупила в играх и я нашёл, что нужно изменить в рестре - отключить пару служб, изменить параметры,
 а потом мне стало лень это делать руками и я решил написать эту программку 
+
+[GameMode for Windows 10](gmwx2.png?raw=true "GameMode")
