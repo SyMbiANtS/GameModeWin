@@ -60,7 +60,7 @@ namespace GameModeWin
             servicePath.SetValue("NegativeCacheTime", 0);
             servicePath.SetValue("NegativeSOACacheTime", 0);
             servicePath.SetValue("NetFailureCacheTime", 0);
-            servicePath.SetValue("MaximumUdpPacketSize", 512);
+            servicePath.SetValue("MaximumUdpPacketSize", 0x200);
 
             servicePath.Close();
         }
@@ -69,10 +69,10 @@ namespace GameModeWin
         {
             RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Dnscache\\Parameters", true);
 
-            servicePath.SetValue("NegativeCacheTime", 600);
-            servicePath.SetValue("NegativeSOACacheTime", 300);
-            servicePath.SetValue("NetFailureCacheTime", 120);
-            servicePath.SetValue("MaximumUdpPacketSize", 1472);
+            servicePath.SetValue("NegativeCacheTime", 0x258);
+            servicePath.SetValue("NegativeSOACacheTime", 0x12C);
+            servicePath.SetValue("NetFailureCacheTime", 0x78);
+            servicePath.SetValue("MaximumUdpPacketSize", 0x5C0);
 
             servicePath.Close();
         }
@@ -85,7 +85,7 @@ namespace GameModeWin
         {
             RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
-            keyPath.SetValue("NetworkThrottlingIndex", "ffffffff", RegistryValueKind.DWord);
+            keyPath.SetValue("NetworkThrottlingIndex", 0xffffffff, RegistryValueKind.DWord);
             keyPath.SetValue("SystemResponsiveness", 0);
             keyPath.Close();
 
@@ -120,8 +120,8 @@ namespace GameModeWin
             RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Tcpip\\Parameters", true);
 
             keyPath.SetValue("DefaultTTL", 40);
-            keyPath.SetValue("KeepAliveTime", "493E0", RegistryValueKind.DWord); //300 000 ms = 5min
-            keyPath.SetValue("MaxUserPort", 65534, RegistryValueKind.DWord);
+            keyPath.SetValue("KeepAliveTime", 0x493E0, RegistryValueKind.DWord); //300 000 ms = 5min
+            keyPath.SetValue("MaxUserPort", 0xFFFE, RegistryValueKind.DWord);
             keyPath.SetValue("QualifyingDestinationThreshold", 3);
             keyPath.SetValue("SynAttackProtect", 1);
             keyPath.SetValue("Tcp1323Opts", 1);
@@ -138,9 +138,9 @@ namespace GameModeWin
         {
             RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\Tcpip\\Parameters", true);
 
-            keyPath.SetValue("DefaultTTL", 128, RegistryValueKind.DWord);
-            keyPath.SetValue("KeepAliveTime", "6DDD00", RegistryValueKind.DWord);
-            keyPath.SetValue("MaxUserPort", 5000, RegistryValueKind.DWord);
+            keyPath.SetValue("DefaultTTL", 100, RegistryValueKind.DWord);
+            keyPath.SetValue("KeepAliveTime", 0x6DDD00, RegistryValueKind.DWord);
+            keyPath.SetValue("MaxUserPort", 0x1388, RegistryValueKind.DWord);
             keyPath.SetValue("QualifyingDestinationThreshold", 3, RegistryValueKind.DWord);
             keyPath.SetValue("SynAttackProtect", 0, RegistryValueKind.DWord);
             keyPath.SetValue("Tcp1323Opts", 3, RegistryValueKind.DWord);
