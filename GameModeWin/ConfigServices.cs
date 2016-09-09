@@ -83,7 +83,31 @@ namespace GameModeWin
         public void updateOff()
         {
             RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
-            
+
+            if (servicePath.OpenSubKey("WindowsUpdate") == null)
+            {
+                servicePath.Close();
+                RegistryKey sp = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+                sp = sp.CreateSubKey("WindowsUpdate");
+                
+                sp.Close();
+
+                RegistryKey sp2 = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\WindowsUpdate", true);
+                    if (sp2.OpenSubKey("AU") == null)
+                    {
+                        sp2.CreateSubKey("AU");
+                    sp2.Close();
+                }
+                servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+            }
+
+            RegistryKey sp3 = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\WindowsUpdate", true);
+            if (sp3.OpenSubKey("AU") == null)
+            {
+                sp3.CreateSubKey("AU");
+                sp3.Close();
+            }
+
             servicePath = servicePath.OpenSubKey("WindowsUpdate\\AU", true);
 
             servicePath.SetValue("NoAutoUpdate", 1);
@@ -111,6 +135,7 @@ namespace GameModeWin
                 servicePath.Close();
                 RegistryKey sp = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
                 sp = sp.CreateSubKey("WindowsStore");
+                sp.Close();
                 servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft", true);
             }
 
