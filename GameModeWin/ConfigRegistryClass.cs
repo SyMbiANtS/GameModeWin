@@ -83,26 +83,37 @@ namespace GameModeWin
 
         public void setTCPNodelay()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
-            keyPath.SetValue("NetworkThrottlingIndex", 0xffffffff, RegistryValueKind.DWord);
-            keyPath.SetValue("SystemResponsiveness", 0);
-            keyPath.Close();
+            try
+            {
+                // this key is not writeble for some reason, maybe redirected or something else
+                // RegistryKey keyPath3 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true); 
+                //
+                //     RegistryKey keyPath3 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
-            RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\MSMQ\\Parameters", true);
-            
-            keyPath1.SetValue("TcpNoDelay", 1);
-            keyPath1.Close();
+                //       keyPath3.SetValue("NetworkThrottlingIndex",  0xffffffff, RegistryValueKind.DWord);
+                //     keyPath3.SetValue("SystemResponsiveness", 0, RegistryValueKind.DWord);
+                //     keyPath3.Close();
+
+                RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\MSMQ\\Parameters", true);
+
+                keyPath1.SetValue("TcpNoDelay", 1);
+                keyPath1.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error");
+            }
 
         }
 
         public void unsetTCPNodelay()
         {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
+          //  RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true);
 
-            keyPath.SetValue("NetworkThrottlingIndex", 10);
-            keyPath.SetValue("SystemResponsiveness", 14);
-            keyPath.Close();
+          //  keyPath.SetValue("NetworkThrottlingIndex", 0xa);
+          //  keyPath.SetValue("SystemResponsiveness", 14);
+          //  keyPath.Close();
 
             RegistryKey keyPath1 = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\MSMQ\\Parameters", true);
 
