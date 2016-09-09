@@ -5,6 +5,6 @@ i had some freezes in games, so i decided to do something and found that it is p
 this program can simply change those keys and set them back without need for search it
 i'll publish it in github and you'll be able to change those keys yourself
 
-windows 10 optimization for gaming || оптимизация windows 10 для игр
-В общем винда тупила в играх и я нашёл, что нужно изменить в рестре - отключить пару служб, изменить параметры,
-а потом мне стало лень это делать руками и я решил написать эту программку 
+windows 10 optimization for gaming || РѕРїС‚РёРјРёР·Р°С†РёСЏ windows 10 РґР»СЏ РёРіСЂ
+Р’ РѕР±С‰РµРј РІРёРЅРґР° С‚СѓРїРёР»Р° РІ РёРіСЂР°С… Рё СЏ РЅР°С€С‘Р», С‡С‚Рѕ РЅСѓР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ РІ СЂРµСЃС‚СЂРµ - РѕС‚РєР»СЋС‡РёС‚СЊ РїР°СЂСѓ СЃР»СѓР¶Р±, РёР·РјРµРЅРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹,
+Р° РїРѕС‚РѕРј РјРЅРµ СЃС‚Р°Р»Рѕ Р»РµРЅСЊ СЌС‚Рѕ РґРµР»Р°С‚СЊ СЂСѓРєР°РјРё Рё СЏ СЂРµС€РёР» РЅР°РїРёСЃР°С‚СЊ СЌС‚Сѓ РїСЂРѕРіСЂР°РјРјРєСѓ 
