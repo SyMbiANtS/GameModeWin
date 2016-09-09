@@ -21,243 +21,125 @@ namespace GameModeWin
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ConfigRegistryClass crc = new ConfigRegistryClass();
+        public ConfigServices csrv = new ConfigServices();
+
         public MainWindow()
         {
             InitializeComponent();
+            createRegSettings();
         }
 
         private void bON_Click(object sender, RoutedEventArgs e)
         {
-            setFetch();
-            setTime();
+            
+            crc.setFetch();
+            csrv.setTime();
+            writeRegSettings();
         }
 
         private void bOFF_Click(object sender, RoutedEventArgs e)
         {
-            unsetFetch();
-            unsetTime();
+            crc.unsetFetch();
+            csrv.unsetTime();
+            writeRegSettings();
+
         }
 
-        private void createRegSettings()
+
+
+
+
+        public void createRegSettings()
         {
 
 
-            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System", true);
-            keySettings.OpenSubKey("GameConfigStore", true);
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore", true);
             if (keySettings.GetValue("GameMode") == null)
             {
                 keySettings.CreateSubKey("GameMode");
-            }
-            keySettings.OpenSubKey("GameMode", true);
+                
+                keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+               
+                keySettings.SetValue("Superfetch", 1);
+                keySettings.SetValue("udpCache", 1);
+                keySettings.SetValue("tcpParam", 1);
+                keySettings.SetValue("TimeBroker", "1");
 
-
-            if (keySettings.GetValue("Superfetch").Equals("1"))
-            {
-                cb101.IsChecked = true ;
-                cb201.IsChecked = true;
             }
-            
-            if (keySettings.GetValue("udpCache").Equals("1"))
+            keySettings.Close();
+            keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+
+            if (keySettings.GetValue("Superfetch").Equals("0"))
             {
-                cb103.IsChecked = true;
-                cb203.IsChecked = true;
+                cb101.IsChecked = false;
+                cb201.IsChecked = false;
             }
 
-            if (keySettings.GetValue("tcpParam").Equals("1"))
+            if (keySettings.GetValue("udpCache").Equals("0"))
             {
-                cb104.IsChecked = true;
-                cb204.IsChecked = true;
+                cb103.IsChecked = false;
+                cb203.IsChecked = false;
             }
-            if (keySettings.GetValue("TimeBroker").Equals("1"))
+
+            if (keySettings.GetValue("tcpParam").Equals("0"))
             {
-                cb107.IsChecked = true;
-                cb207.IsChecked = true;
+                cb104.IsChecked = false;
+                cb204.IsChecked = false;
             }
-           
+            if (keySettings.GetValue("TimeBroker").Equals("0"))
+            {
+                cb107.IsChecked = false;
+                cb207.IsChecked = false;
+            }
+
         }
 
         private void writeRegSettings()
         {
 
 
-            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System", true);
-            keySettings.OpenSubKey("GameConfigStore", true);
-            if (keySettings.GetValue("GameMode") == null)
-            {
-                keySettings.CreateSubKey("GameMode");
-            }
-            keySettings.OpenSubKey("GameMode", true);
-
-
-            if (keySettings.GetValue("Superfetch").Equals("1"))
-            {
-                cb101.IsChecked = true;
-                cb201.IsChecked = true;
-            }
-
-            if (keySettings.GetValue("udpCache").Equals("1"))
-            {
-                cb103.IsChecked = true;
-                cb203.IsChecked = true;
-            }
-
-            if (keySettings.GetValue("tcpParam").Equals("1"))
-            {
-                cb104.IsChecked = true;
-                cb204.IsChecked = true;
-            }
-            if (keySettings.GetValue("TimeBroker").Equals("1"))
-            {
-                cb107.IsChecked = true;
-                cb207.IsChecked = true;
-            }
-
-        }
-
-
-        /// <summary>
-        /// Set Superfetch and Prefetch + Service
-        /// </summary>
-
-        public void setFetch()
-        {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System", true);
-            keyPath = keyPath.OpenSubKey("CurrentControlSet", true);
-            keyPath = keyPath.OpenSubKey("Control", true);
-            keyPath = keyPath.OpenSubKey("Session Manager", true);
-            keyPath = keyPath.OpenSubKey("Memory Management", true);
-            keyPath = keyPath.OpenSubKey("PrefetchParameters", true);
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
             
-            keyPath.SetValue("EnablePrefetcher","0");
-            keyPath.SetValue("EnableSuperfetch", "0");
 
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System",true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("SysMain", true);
-
-            servicePath.SetValue("Start", "4");
-            servicePath.Close();
-            keyPath.Close();
-        }
-
-        public void unsetFetch()
-        {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("System" , true);
-            keyPath = keyPath.OpenSubKey("CurrentControlSet", true);
-            keyPath = keyPath.OpenSubKey("Control", true);
-            keyPath = keyPath.OpenSubKey("Session Manager", true);
-            keyPath = keyPath.OpenSubKey("Memory Management", true);
-            keyPath = keyPath.OpenSubKey("PrefetchParameters", true);
-
-            keyPath.SetValue("EnablePrefetcher", "3");
-            keyPath.SetValue("EnableSuperfetch", "1");
-
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("SysMain", true);
-
-            servicePath.SetValue("Start", "3");
-            servicePath.Close();
-            keyPath.Close();
-
-        }
+            if (cb101.IsChecked == true)
+            {
+                keySettings.SetValue("Superfetch", 1);
+            }  else   {
+                keySettings.SetValue("Superfetch", 0);
+            }
 
 
-        /// <summary>
-        /// Set TimeBroker
-        /// </summary>
+            if (cb103.IsChecked == true)
+            {
+                keySettings.SetValue("udpCache", "1");
+            }  else   {
+                keySettings.SetValue("udpCache", "0");
+            }
 
-        public void setTime()
-        {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("TimeBroker", true);
 
-            servicePath.SetValue("Start", "4");
-            servicePath.Close();
-        }
+            if (cb104.IsChecked == true)
+            {
+                keySettings.SetValue("tcpParam", "1");
+            }  else   {
+                keySettings.SetValue("tcpParam", "0");
+            }
 
-        public void unsetTime()
-        {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("TimeBroker", true);
 
-            servicePath.SetValue("Start", "3");
-            servicePath.Close();
+            if (cb107.IsChecked == true)
+            {
+                keySettings.SetValue("TimeBroker", "1");
+            }  else   {
+                keySettings.SetValue("TimeBroker", "0");
+            }
+
+
         }
 
 
-        /// <summary>
-        /// Set Cache and UDP ??? defaults?
-        /// </summary>
 
-        public void setCacheUDP()
-        {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("Dnscache", true);
-            servicePath = servicePath.OpenSubKey("Parameters", true);
 
-            
-            servicePath.SetValue("NegativeCacheTime", "0");
-            servicePath.SetValue("NegativeSOACacheTime", "0");
-            servicePath.SetValue("NetFailureCacheTime", "0");
-            servicePath.SetValue("MaximumUdpPacketSize", "512");
 
-            servicePath.Close();
-        }
-
-        public void unsetCacheUDP()
-        {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System", true);
-            servicePath = servicePath.OpenSubKey("CurrentControlSet", true);
-            servicePath = servicePath.OpenSubKey("Services", true);
-            servicePath = servicePath.OpenSubKey("Dnscache", true);
-            servicePath = servicePath.OpenSubKey("Parameters", true);
-
-            servicePath.SetValue("NegativeCacheTime", "600");
-            servicePath.SetValue("NegativeSOACacheTime", "300");
-            servicePath.SetValue("NetFailureCacheTime", "120");
-            servicePath.SetValue("MaximumUdpPacketSize", "1472");
-
-            servicePath.Close();
-        }
-
-        /// <summary>
-        /// TcpNodelay enable
-        /// </summary>
-
-        public void setTCPNodelay()
-        {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath = keyPath.OpenSubKey("Microsoft", true);
-            keyPath = keyPath.OpenSubKey("Windows NT", true);
-            keyPath = keyPath.OpenSubKey("CurrentVersion", true);
-            keyPath = keyPath.OpenSubKey("Multimedia", true);
-            keyPath = keyPath.OpenSubKey("SystemProfile", true);
-
-            keyPath.SetValue("NetworkThrottlingIndex", "ffffffff");
-            keyPath.SetValue("SystemResponsiveness", "0");
-        }
-
-        public void unsetTCPNodelay()
-        {
-            RegistryKey keyPath = Registry.LocalMachine.OpenSubKey("Software", true);
-            keyPath = keyPath.OpenSubKey("Microsoft", true);
-            keyPath = keyPath.OpenSubKey("Windows NT", true);
-            keyPath = keyPath.OpenSubKey("CurrentVersion", true);
-            keyPath = keyPath.OpenSubKey("Multimedia", true);
-            keyPath = keyPath.OpenSubKey("SystemProfile", true);
-
-            keyPath.SetValue("NetworkThrottlingIndex", "10");
-            keyPath.SetValue("SystemResponsiveness", "20");
-        }
 
 
         ///disable firewall

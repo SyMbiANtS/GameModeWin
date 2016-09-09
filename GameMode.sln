@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMode", "GameModeWin\GameMode.csproj", "{4AD67047-0D52-4187-B0B9-8993CD4728DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameModeWin", "GameModeWin\GameModeWin.csproj", "{4AD67047-0D52-4187-B0B9-8993CD4728DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

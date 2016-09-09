@@ -20,7 +20,9 @@
                     <CheckBox x:Name="cb105" Foreground="#FF5CCCDE" Content="Disable Notifications" IsChecked="True"/>
                     <CheckBox x:Name="cb106" Foreground="#FF5CCCDE" Content="Disable Update" IsChecked="True"/>
                     <CheckBox x:Name="cb107" Foreground="#FF5CCCDE" Content="Disable RuntimeBroker" IsChecked="True"/>
-
+                    <CheckBox x:Name="cb108" Foreground="#FF5CCCDE" Content="Disable Defender" IsChecked="True"/>
+                    <CheckBox x:Name="cb109" Foreground="#FF5CCCDE" Content="Defender Local Override" IsChecked="True"/>
+                    <CheckBox x:Name="cb110" Foreground="#FF5CCCDE" Content="Disable Indexing" IsChecked="True"/>
                 </ListBox>
                 <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="242" Margin="201,10,0,0" VerticalAlignment="Top" Width="171" Background="#FF14231A">
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Registry Values"/>
@@ -33,7 +35,9 @@
                     <CheckBox x:Name="cb205" Foreground="#FF5CDEA3" Content="Disable Notifications" IsChecked="True"/>
                     <CheckBox x:Name="cb206" Foreground="#FF5CDEA3" Content="Disable Update" IsChecked="True"/>
                     <CheckBox x:Name="cb207" Foreground="#FF5CDEA3" Content="Disable RuntimeBroker" IsChecked="True"/>
-
+                    <CheckBox x:Name="cb208" Foreground="#FF5CDEA3" Content="Disable Defender" IsChecked="True"/>
+                    <CheckBox x:Name="cb209" Foreground="#FF5CDEA3" Content="Defender Local Override" IsChecked="True"/>
+                    <CheckBox x:Name="cb210" Foreground="#FF5CDEA3" Content="Disable Indexing" IsChecked="True"/>
                 </ListBox>
                 <Button x:Name="bON" Content="ON" HorizontalAlignment="Left" Margin="61,269,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF2596D6" Foreground="#FF4186CB" Background="#FF141B21" FontSize="16" FontWeight="Bold" IsDefault="True" Click="bON_Click"/>
                 <Button x:Name="bReboot" Content="Reboot" HorizontalAlignment="Left" Height="25" Margin="154,270,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFF30D0D" Background="#FF1B0F0F" Foreground="Red"/>
