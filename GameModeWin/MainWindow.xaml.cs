@@ -428,9 +428,22 @@ namespace GameModeWin
             System.Diagnostics.Process.Start("http://steamcommunity.com/sharedfiles/filedetails/?id=476760198"); 
         }
 
+
+
+
+        //[System.Runtime.InteropServices.DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        //internal static extern bool ExitWindowsEx(int flg, int rea);
+
         private void bReboot_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("shutdown.exe", "-r -t 0");
+           
+            //ExitWindowsEx(0x00000002, 0);
+
+        }
+
+        private void bReboot_Click_1(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("shutdown", "/r /t 5 /d EP:2:4 /c " + (char)32 + "System reboot to apply new settings" + (char)32 +" ");
         }
     }
 }
