@@ -33,8 +33,9 @@ namespace GameModeWin
 
         private void bON_Click(object sender, RoutedEventArgs e)
         {
+            try  {
 
-            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+                RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
             if ( keySettings.GetValue("GM").Equals("0") )
             {
                 
@@ -93,67 +94,81 @@ namespace GameModeWin
 
                 
             }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show(ex2.ToString(), "Error ON");
+            }
         }
 
         private void bOFF_Click(object sender, RoutedEventArgs e)
         {
+            try { 
+
+
             RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
-            if ( keySettings.GetValue("GM").Equals("1"))
+                if (keySettings.GetValue("GM").Equals("1"))
                 {
-                   
-            if (cb201.IsChecked == true)
-            {
-                crc.unsetFetch();
-            }
 
-            if (cb202.IsChecked == true)
-            {
-                crc.unsetTCPNodelay();
-            }
+                    if (cb201.IsChecked == true)
+                    {
+                        crc.unsetFetch();
+                    }
 
-            if (cb203.IsChecked == true)
-            {
-                crc.unsetCacheUDP();
-            }
-            if (cb204.IsChecked == true)
-            {
-                crc.unsetTCPIP();
-            }
-            if (cb205.IsChecked == true)
-            {
-                csrv.notifyOn();
-            }
-            if (cb206.IsChecked == true)
-            {
-                csrv.updateOn();
-                csrv.updateStoreOn();
-            }
-            if (cb207.IsChecked == true)
-            {
-                csrv.unsetTime();
-            }
-            if (cb208.IsChecked == true)
-            {
-                csrv.defenderOn();
-            }
-            if (cb209.IsChecked == true)
-            {
-                csrv.defLocalOverOFF();
-            }
-            if (cb210.IsChecked == true)
-            {
-                csrv.indxOn();
-            }
+                    if (cb202.IsChecked == true)
+                    {
+                        crc.unsetTCPNodelay();
+                    }
 
-            
+                    if (cb203.IsChecked == true)
+                    {
+                        crc.unsetCacheUDP();
+                    }
+                    if (cb204.IsChecked == true)
+                    {
+                        crc.unsetTCPIP();
+                    }
+                    if (cb205.IsChecked == true)
+                    {
+                        csrv.notifyOn();
+                    }
+                    if (cb206.IsChecked == true)
+                    {
+                        csrv.updateOn();
+                        csrv.updateStoreOn();
+                    }
+                    if (cb207.IsChecked == true)
+                    {
+                        csrv.unsetTime();
+                    }
+                    if (cb208.IsChecked == true)
+                    {
+                        csrv.defenderOn();
+                    }
+                    if (cb209.IsChecked == true)
+                    {
+                        csrv.defLocalOverOFF();
+                    }
+                    if (cb210.IsChecked == true)
+                    {
+                        csrv.indxOn();
+                    }
+
 
             keySettings.SetValue("GM", "0");
 
-            writeRegSettings();
-                readRegSettings();
+                    writeRegSettings();
+                    readRegSettings();
+
                 
             }
 
+
+            }
+            catch (Exception ex1)
+            {
+                MessageBox.Show(ex1.ToString(), "Error Off");
+            }
         }
 
 
