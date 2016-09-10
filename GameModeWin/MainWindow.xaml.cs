@@ -33,57 +33,74 @@ namespace GameModeWin
 
         private void bON_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (cb101.IsChecked == true)
-            {
-                crc.setFetch();
-            }
 
-            if (cb102.IsChecked == true)
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+            if ( keySettings.GetValue("GM").Equals("0") )
             {
-                crc.setTCPNodelay();
-            }
+                
 
-            if (cb103.IsChecked == true)
-            {
-                crc.setCacheUDP();
+
+                    if (cb101.IsChecked == true)
+                    {
+                        crc.setFetch();
+                    }
+
+                    if (cb102.IsChecked == true)
+                    {
+                        crc.setTCPNodelay();
+                    }
+
+                    if (cb103.IsChecked == true)
+                    {
+                        crc.setCacheUDP();
+                    }
+                    if (cb104.IsChecked == true)
+                    {
+                        crc.setTCPIP();
+                    }
+                    if (cb105.IsChecked == true)
+                    {
+                        csrv.notifyOff();
+                    }
+                    if (cb106.IsChecked == true)
+                    {
+                        csrv.updateOff();
+                        csrv.updateStoreOff();
+                    }
+                    if (cb107.IsChecked == true)
+                    {
+                        csrv.setTime();
+                    }
+                    if (cb108.IsChecked == true)
+                    {
+                        csrv.defenderOff();
+                    }
+                    if (cb109.IsChecked == true)
+                    {
+                        csrv.defLocalOverON();
+                    }
+                    if (cb110.IsChecked == true)
+                    {
+                        csrv.indxOn();
+                    }
+                         
+
+                    
+
+                    writeRegSettings();
+                    keySettings.SetValue("GM", "1");
+                    readRegSettings();
+
+                
             }
-            if (cb104.IsChecked == true)
-            {
-                crc.setTCPIP();
-            }
-            if (cb105.IsChecked == true)
-            {
-                csrv.notifyOff();
-            }
-            if (cb106.IsChecked == true)
-            {
-                csrv.updateOff();
-                csrv.updateStoreOff();
-            }
-            if (cb107.IsChecked == true)
-            {
-                csrv.setTime();
-            }
-            if (cb108.IsChecked == true)
-            {
-                csrv.defenderOff();
-            }
-            if (cb109.IsChecked == true)
-            {
-                csrv.defLocalOverON();
-            }
-            if (cb110.IsChecked == true)
-            {
-                csrv.indxOn();
-            }
-            
-            writeRegSettings();
-            readRegSettings();
         }
 
         private void bOFF_Click(object sender, RoutedEventArgs e)
         {
+            RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+            if ( keySettings.GetValue("GM").Equals("1"))
+                {
+                   
             if (cb201.IsChecked == true)
             {
                 crc.unsetFetch();
@@ -128,7 +145,14 @@ namespace GameModeWin
                 csrv.indxOn();
             }
 
+            
+
+            keySettings.SetValue("GM", "0");
+
             writeRegSettings();
+                readRegSettings();
+                
+            }
 
         }
 
@@ -157,6 +181,7 @@ namespace GameModeWin
                 keySettings.SetValue("Defender", "1");
                 keySettings.SetValue("LocalOverride", "1");
                 keySettings.SetValue("indexing", "1");
+                keySettings.SetValue("GM", "0");
 
             }
             keySettings.Close();
@@ -225,6 +250,23 @@ namespace GameModeWin
                 cb110.IsChecked = false;
                 cb210.IsChecked = false;
             }
+            if (keySettings.GetValue("GM") == null)
+            {
+                keySettings.SetValue("GM", "0");
+            }
+
+            if (keySettings.GetValue("GM").Equals("0"))
+                {
+                    bOFF.Content = "Active";
+                    bON.Content = "ON";
+                }
+                else if (keySettings.GetValue("GM").Equals("1"))
+                {
+                    bON.Content = "Active";
+                    bOFF.Content = "OFF";
+                }
+            
+
 
             keySettings.Close();
 
