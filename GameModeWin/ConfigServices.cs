@@ -162,9 +162,9 @@ namespace GameModeWin
             if (servicePath.OpenSubKey("PushNotifications") == null)
             {
                 servicePath.Close();
-                RegistryKey sp = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft", true);
-                sp = sp.OpenSubKey("Windows\\CurrentVersion", true);
+                RegistryKey sp = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\CurrentVersion", true);
                 sp = sp.CreateSubKey("PushNotifications");
+                sp.Close();
                 servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\CurrentVersion", true);
             }
             servicePath = servicePath.OpenSubKey("PushNotifications", true);
@@ -172,6 +172,31 @@ namespace GameModeWin
             servicePath.SetValue("NoTileApplicationNotification", 1);
             servicePath.SetValue("NoToastApplicationNotification", 1);
             servicePath.Close();
+
+            RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
+
+            servicePath1.SetValue("Start", 4);
+            servicePath1.Close();
+
+            RegistryKey servicePath3 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+
+            if (servicePath3.OpenSubKey("DataCollection") == null)
+            {
+                servicePath3.Close();
+                RegistryKey sp1 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+               
+                sp1 = sp1.CreateSubKey("DataCollection");
+                sp1.Close();
+                servicePath3 = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true); 
+            }
+            servicePath3 = servicePath3.OpenSubKey("DataCollection", true);
+
+            /// they say that it will be equal to 1 if it's set to 0, but why they got 0?
+            /// this can be commented and maybe the result will be the same
+            /// but if it will be not set, then collected data will be set through settings manually
+            servicePath3.SetValue("AllowTelemetry", 0);
+            servicePath3.Close();
+              
         }
 
         public void notifyOn()
@@ -181,26 +206,70 @@ namespace GameModeWin
             servicePath.DeleteValue("NoToastApplicationNotification");
             servicePath.DeleteValue("NoTileApplicationNotification");
             servicePath.Close();
+
+            RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
+
+            servicePath1.SetValue("Start", 2);
+            servicePath1.Close();
+
+            RegistryKey servicePath3 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\DataCollection", true);
+            servicePath3.DeleteValue("AllowTelemetry");
+            servicePath3.Close();
+
         }
 
         /// <summary>
-        /// Disable Indexng
+        /// Disable Indexng, telemetry, clr-opt
         /// </summary>
 
         public void indxOff()
         {
             RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\WSearch", true);
-
+            servicePath.SetValue("DelayedAutoStart", 0);
             servicePath.SetValue("Start", 4);
             servicePath.Close();
+
+            RegistryKey sp = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\clr_optimization_v4.0.30319_32", true);
+            sp.SetValue("DelayedAutostart", 0);
+            sp.Close();
+
+            RegistryKey sp1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services", true);
+            if (sp1.OpenSubKey("clr_optimization_v4.0.30319_64") != null)
+            {
+                sp1.Close();
+                RegistryKey sp2 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\clr_optimization_v4.0.30319_64", true);
+                sp2.SetValue("DelayedAutostart", 0);
+                sp2.Close();
+            }
+
+
+
+
+
         }
 
         public void indxOn()
         {
             RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\WSearch", true);
-
+            servicePath.SetValue("DelayedAutoStart", 1);
             servicePath.SetValue("Start", 2);
             servicePath.Close();
+
+            RegistryKey sp = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\clr_optimization_v4.0.30319_32", true);
+            sp.SetValue("DelayedAutostart", 1);
+            sp.Close();
+
+            RegistryKey sp1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services", true);
+            if (sp1.OpenSubKey("clr_optimization_v4.0.30319_64") != null)
+            {
+                sp1.Close();
+                RegistryKey sp2 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\clr_optimization_v4.0.30319_64", true);
+                sp2.SetValue("DelayedAutostart", 1);
+                sp2.Close();
+            }
+
+
+
         }
 
 
