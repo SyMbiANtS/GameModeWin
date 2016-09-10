@@ -443,7 +443,7 @@ namespace GameModeWin
 
         private void bReboot_Click_1(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("shutdown", "/r /t 5 /d EP:2:4 /c " + (char)32 + "System reboot to apply new settings" + (char)32 +" ");
+            System.Diagnostics.Process.Start("shutdown", "/r /t 5 /d P:2:4 /c  \"System reboot to apply GameMode\"");
         }
     }
 }
