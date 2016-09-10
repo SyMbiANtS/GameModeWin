@@ -82,7 +82,8 @@ namespace GameModeWin
                     }
                     if (cb110.IsChecked == true)
                     {
-                        csrv.indxOn();
+                        csrv.indxOff();
+                        csrv.disableWsearch();
                     }
                          
 
@@ -152,6 +153,7 @@ namespace GameModeWin
                     if (cb210.IsChecked == true)
                     {
                         csrv.indxOn();
+                        csrv.enableWSearch();
                     }
 
 

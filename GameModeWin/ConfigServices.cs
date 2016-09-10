@@ -286,7 +286,7 @@ namespace GameModeWin
                 sp2.Close();
             }
 
-            disableWsearch();
+            
 
 
         }
@@ -342,7 +342,7 @@ namespace GameModeWin
                 sp2.Close();
             }
 
-            enableWSearch();
+           
 
         }
 
