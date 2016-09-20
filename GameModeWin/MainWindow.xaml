@@ -5,45 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="GameMode Windows 10" Height="361.127" Width="394.508">
+        Title="GameMode Windows 10" Height="403.435" Width="396.774">
     <Grid>
         <Border BorderBrush="#FF3C4855" BorderThickness="1" Background="Black">
             <Grid>
-                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="174" Background="#FF111723">
+                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="288" Margin="10,10,0,0" VerticalAlignment="Top" Width="174" Background="#FF111723" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Registry Values"/>
                     <CheckBox x:Name="cb101" Foreground="#FF5CCCDE" Content="Disable Superfetch" IsChecked="True"/>
                     <CheckBox x:Name="cb103" Foreground="#FF5CCCDE" Content="Set UDP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb104" Foreground="#FF5CCCDE" Content="Set TCP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb102" Foreground="#FF5CCCDE" Content="Set TCP NoDelay" IsChecked="True"/>
-                    <ListBoxItem Foreground="#FFDEC15C" Content="Load Services Values"/>
+                    
                     <CheckBox x:Name="cb105" Foreground="#FF5CCCDE" Content="Disable Notifications" IsChecked="True"/>
                     <CheckBox x:Name="cb106" Foreground="#FF5CCCDE" Content="Disable Update" IsChecked="True"/>
                     <CheckBox x:Name="cb107" Foreground="#FF5CCCDE" Content="Disable RuntimeBroker" IsChecked="True"/>
                     <CheckBox x:Name="cb108" Foreground="#FF5CCCDE" Content="Disable Defender" IsChecked="True"/>
                     <CheckBox x:Name="cb109" Foreground="#FF5CCCDE" Content="Defender Local Override" IsChecked="True"/>
                     <CheckBox x:Name="cb110" Foreground="#FF5CCCDE" Content="Disable Indexing" IsChecked="True"/>
+                    <CheckBox x:Name="cb111" Foreground="#FF5CCCDE" Content="Disable Telemetry" IsChecked="True"/>
+                    <CheckBox x:Name="cb112" Foreground="#FF5CCCDE" Content="Disable Cortana" IsChecked="True"/>
+                    <CheckBox x:Name="cb113" Foreground="#FF5CCCDE" Content="Disable .Net optimization" IsChecked="True"/>
+                    <CheckBox x:Name="cb114" Foreground="#FF5CCCDE" Content="Disable App Compatibility" IsChecked="True"/>
                 </ListBox>
-                <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="242" Margin="201,10,0,0" VerticalAlignment="Top" Width="171" Background="#FF14231A">
+                <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="288" Margin="201,10,0,0" VerticalAlignment="Top" Width="171" Background="#FF14231A" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBoxItem Foreground="#FFDEC15C" Content="Load Registry Values"/>
-                    <CheckBox x:Name="cb201" Foreground="#FF5CDEA3" Content="Disable Superfetch" IsChecked="True"/>
+                    <CheckBox x:Name="cb201" Foreground="#FF5CDEA3" Content="Enable Superfetch" IsChecked="True"/>
                     <CheckBox x:Name="cb203" Foreground="#FF5CDEA3" Content="Set UDP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb204" Foreground="#FF5CDEA3" Content="Set TCP Params" IsChecked="True"/>
                     <CheckBox x:Name="cb202" Foreground="#FF5CDEA3" Content="Set TCPNoDelay" IsChecked="True"/>
-                    <ListBoxItem Foreground="#FFDEC15C" Content="Load Services Values"/>
-                    <CheckBox x:Name="cb205" Foreground="#FF5CDEA3" Content="Disable Notifications" IsChecked="True"/>
-                    <CheckBox x:Name="cb206" Foreground="#FF5CDEA3" Content="Disable Update" IsChecked="True"/>
-                    <CheckBox x:Name="cb207" Foreground="#FF5CDEA3" Content="Disable RuntimeBroker" IsChecked="True"/>
-                    <CheckBox x:Name="cb208" Foreground="#FF5CDEA3" Content="Disable Defender" IsChecked="True"/>
+                    
+                    <CheckBox x:Name="cb205" Foreground="#FF5CDEA3" Content="Enable Notifications" IsChecked="True"/>
+                    <CheckBox x:Name="cb206" Foreground="#FF5CDEA3" Content="Enable Update" IsChecked="True"/>
+                    <CheckBox x:Name="cb207" Foreground="#FF5CDEA3" Content="Enable RuntimeBroker" IsChecked="True"/>
+                    <CheckBox x:Name="cb208" Foreground="#FF5CDEA3" Content="Enable Defender" IsChecked="True"/>
                     <CheckBox x:Name="cb209" Foreground="#FF5CDEA3" Content="Defender Local Override" IsChecked="True"/>
-                    <CheckBox x:Name="cb210" Foreground="#FF5CDEA3" Content="Disable Indexing" IsChecked="True"/>
+                    <CheckBox x:Name="cb210" Foreground="#FF5CDEA3" Content="Enable Indexing" IsChecked="True"/>
+                    <CheckBox x:Name="cb211" Foreground="#FF5CDEA3" Content="Enable Telemetry" IsChecked="True"/>
+                    <CheckBox x:Name="cb212" Foreground="#FF5CDEA3" Content="Enable Cortana" IsChecked="True"/>
+                    <CheckBox x:Name="cb213" Foreground="#FF5CDEA3" Content="Enable .Net optimization" IsChecked="True"/>
+                    <CheckBox x:Name="cb214" Foreground="#FF5CDEA3" Content="Enable App Compatibility" IsChecked="True"/>
                 </ListBox>
-                <Button x:Name="bON" Content="ON" HorizontalAlignment="Left" Margin="61,269,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF2596D6" Foreground="#FF4186CB" Background="#FF141B21" FontSize="16" FontWeight="Bold" IsDefault="True" Click="bON_Click"/>
-                <Button x:Name="bReboot" Content="Reboot" HorizontalAlignment="Left" Height="25" Margin="154,270,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFF30D0D" Background="#FF1B0F0F" Foreground="Red" Click="bReboot_Click_1"/>
-                <Button x:Name="bOFF" Content="OFF" HorizontalAlignment="Left" Margin="250,269,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF52D32C" Foreground="#FF37AE24" Background="#FF131B15" FontSize="16" FontWeight="Bold" Click="bOFF_Click"/>
-                <Label x:Name="SymbLabel" Content="Symbiants.com" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="29" Width="98" Background="Black" FontStyle="Italic" MouseDoubleClick="SymbLabel_MouseDoubleClick" ToolTip="double click to visit" Cursor="Hand" TextOptions.TextHintingMode="Animated"/>
-                <Label x:Name="SpeedLabel" Content="Speedguide.net" HorizontalAlignment="Right" Margin="0,300,0,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="29" Width="98" Background="Black" FontStyle="Italic" MouseDoubleClick="SpeedLabel_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
-                <Label x:Name="SteamLabel" Content="doc.ru" HorizontalAlignment="Right" Margin="0,300,151,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="28" Width="45" Background="Black" FontStyle="Italic" MouseDoubleClick="SteamLabel_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
-                <Label x:Name="Steam2Label" Content="doc.en" HorizontalAlignment="Right" Margin="0,300,201,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="28" Width="44" Background="Black" FontStyle="Italic" MouseDoubleClick="Steam2Label_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
+                <Button x:Name="bON" Content="ON" HorizontalAlignment="Left" Margin="59,310,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF2596D6" Foreground="#FF4186CB" Background="#FF141B21" FontSize="16" FontWeight="Bold" IsDefault="True" Click="bON_Click" Height="28"/>
+                <Button x:Name="bReboot" Content="Reboot" HorizontalAlignment="Left" Height="29" Margin="152,310,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFF30D0D" Background="#FF1B0F0F" Foreground="Red" Click="bReboot_Click_1"/>
+                <Button x:Name="bOFF" Content="OFF" HorizontalAlignment="Left" Margin="248,310,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF52D32C" Foreground="#FF37AE24" Background="#FF131B15" FontSize="16" FontWeight="Bold" Click="bOFF_Click" Height="28"/>
+                <Label x:Name="SymbLabel" Content="Symbiants.com" HorizontalAlignment="Left" Margin="0,343,0,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="26" Width="98" Background="Black" FontStyle="Italic" MouseDoubleClick="SymbLabel_MouseDoubleClick" ToolTip="double click to visit" Cursor="Hand" TextOptions.TextHintingMode="Animated"/>
+                <Label x:Name="SpeedLabel" Content="Speedguide.net" HorizontalAlignment="Right" Margin="0,343,0,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="26" Width="98" Background="Black" FontStyle="Italic" MouseDoubleClick="SpeedLabel_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
+                <Label x:Name="SteamLabel" Content="doc.ru" HorizontalAlignment="Right" Margin="0,343,151,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="24" Width="45" Background="Black" FontStyle="Italic" MouseDoubleClick="SteamLabel_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
+                <Label x:Name="Steam2Label" Content="doc.en" HorizontalAlignment="Right" Margin="0,343,201,0" VerticalAlignment="Top" Foreground="#FF0A9104" Height="24" Width="44" Background="Black" FontStyle="Italic" MouseDoubleClick="Steam2Label_MouseDoubleClick" Cursor="Hand" ToolTip="double click to visit"/>
 
             </Grid>
         </Border>

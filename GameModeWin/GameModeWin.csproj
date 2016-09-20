@@ -105,6 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigDiag.cs" />
     <Compile Include="ConfigRegistryClass.cs" />
     <Compile Include="ConfigServices.cs" />
     <Compile Include="Settings.cs" />

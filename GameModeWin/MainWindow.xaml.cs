@@ -23,6 +23,7 @@ namespace GameModeWin
     {
         public ConfigRegistryClass crc = new ConfigRegistryClass();
         public ConfigServices csrv = new ConfigServices();
+        public ConfigDiag cfd = new ConfigDiag();
 
         public MainWindow()
         {
@@ -61,7 +62,7 @@ namespace GameModeWin
                     }
                     if (cb105.IsChecked == true)
                     {
-                        csrv.notifyOff();
+                        cfd.notifyOff();
                     }
                     if (cb106.IsChecked == true)
                     {
@@ -82,12 +83,29 @@ namespace GameModeWin
                     }
                     if (cb110.IsChecked == true)
                     {
-                        csrv.indxOff();
-                        csrv.disableWsearch();
+                        cfd.indxOff();
+                        cfd.disableWsearch();
                     }
-                         
+                    if (cb111.IsChecked == true)
+                    {
+                        cfd.disableTelemtry();
+                        csrv.disDiag();
+                    }
+                    if (cb112.IsChecked == true)
+                    {
+                        cfd.disableCortana();
+                    }
+                    if (cb113.IsChecked == true)
+                    {
+                        cfd.clrOff();
+                    }
+                    if (cb114.IsChecked == true)
+                    {
+                        cfd.appCompatOff();
+                    }
 
-                    
+
+
 
                     writeRegSettings();
                     keySettings.SetValue("GM", "1");
@@ -131,7 +149,7 @@ namespace GameModeWin
                     }
                     if (cb205.IsChecked == true)
                     {
-                        csrv.notifyOn();
+                        cfd.notifyOn();
                     }
                     if (cb206.IsChecked == true)
                     {
@@ -152,12 +170,31 @@ namespace GameModeWin
                     }
                     if (cb210.IsChecked == true)
                     {
-                        csrv.indxOn();
-                        csrv.enableWSearch();
+                        cfd.indxOn();
+                        cfd.enableWSearch();
+                    }
+
+                    if (cb211.IsChecked == true)
+                    {
+                        cfd.telemetryOn();
+                        csrv.enDiag();
+                    }
+                    if (cb212.IsChecked == true)
+                    {
+                        cfd.enableCortana();
+                    }
+                    if (cb213.IsChecked == true)
+                    {
+                        cfd.clrOn();
+                    }
+                    if (cb214.IsChecked == true)
+                    {
+                        cfd.appCompatOn();
                     }
 
 
-            keySettings.SetValue("GM", "0");
+
+                    keySettings.SetValue("GM", "0");
 
                     writeRegSettings();
                     readRegSettings();
@@ -198,6 +235,10 @@ namespace GameModeWin
                 keySettings.SetValue("Defender", "1");
                 keySettings.SetValue("LocalOverride", "1");
                 keySettings.SetValue("indexing", "1");
+                keySettings.SetValue("Telemetry", "1");
+                keySettings.SetValue("Cortana", "1");
+                keySettings.SetValue("netOpt", "1");
+                keySettings.SetValue("appCompat", "1");
                 keySettings.SetValue("GM", "0");
 
             }
@@ -208,6 +249,27 @@ namespace GameModeWin
         public void readRegSettings()
         {
             RegistryKey keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\GameMode", true);
+
+            if (keySettings.GetValue("GM") == null)
+            {
+                keySettings.SetValue("GM", "0");
+            }
+
+
+
+            if (keySettings.GetValue("GM").Equals("0"))
+            {
+                bOFF.Content = "Stopped";
+                bON.Content = "ON";
+            }
+            else if (keySettings.GetValue("GM").Equals("1"))
+            {
+                bON.Content = "Active";
+                bOFF.Content = "OFF";
+            }
+
+
+
 
             if (keySettings.GetValue("Superfetch").Equals("0"))
             {
@@ -267,22 +329,50 @@ namespace GameModeWin
                 cb110.IsChecked = false;
                 cb210.IsChecked = false;
             }
-            if (keySettings.GetValue("GM") == null)
+
+            if (keySettings.GetValue("Cortana") == null)
             {
-                keySettings.SetValue("GM", "0");
+                keySettings.SetValue("Cortana", "0");
+            }
+            if (keySettings.GetValue("appCompat") == null)
+            {
+                keySettings.SetValue("appCompat", "0");
+            }
+            if (keySettings.GetValue("netOpt") == null)
+            {
+                keySettings.SetValue("netOpt", "0");
+            }
+            if (keySettings.GetValue("Telemetry") == null)
+            {
+                keySettings.SetValue("Telemetry", "0");
             }
 
-            if (keySettings.GetValue("GM").Equals("0"))
-                {
-                    bOFF.Content = "Active";
-                    bON.Content = "ON";
-                }
-                else if (keySettings.GetValue("GM").Equals("1"))
-                {
-                    bON.Content = "Active";
-                    bOFF.Content = "OFF";
-                }
-            
+
+            if (keySettings.GetValue("Telemetry").Equals("0"))
+            {
+                cb111.IsChecked = false;
+                cb211.IsChecked = false;
+            }
+
+            if (keySettings.GetValue("Cortana").Equals("0"))
+            {
+                cb112.IsChecked = false;
+                cb212.IsChecked = false;
+            }
+
+            if (keySettings.GetValue("netOpt").Equals("0"))
+            {
+                cb113.IsChecked = false;
+                cb213.IsChecked = false;
+            }
+
+            if (keySettings.GetValue("appCompat").Equals("0"))
+            {
+                cb114.IsChecked = false;
+                cb214.IsChecked = false;
+            }
+
+
 
 
             keySettings.Close();
@@ -385,6 +475,42 @@ namespace GameModeWin
             else
             {
                 keySettings.SetValue("indexing", "0");
+            }
+
+            if (cb111.IsChecked == true)
+            {
+                keySettings.SetValue("Telemetry", "1");
+            }
+            else
+            {
+                keySettings.SetValue("Telemetry", "0");
+            }
+
+            if (cb112.IsChecked == true)
+            {
+                keySettings.SetValue("Cortana", "1");
+            }
+            else
+            {
+                keySettings.SetValue("Cortana", "0");
+            }
+
+            if (cb113.IsChecked == true)
+            {
+                keySettings.SetValue("netOpt", "1");
+            }
+            else
+            {
+                keySettings.SetValue("netOpt", "0");
+            }
+
+            if (cb114.IsChecked == true)
+            {
+                keySettings.SetValue("appCompat", "1");
+            }
+            else
+            {
+                keySettings.SetValue("appCompat", "0");
             }
 
             keySettings.Close();
