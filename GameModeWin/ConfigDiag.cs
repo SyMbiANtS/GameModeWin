@@ -124,10 +124,6 @@ namespace GameModeWin
         public void telemetryOn()
         {
 
-            RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
-
-            servicePath1.SetValue("Start", 2);
-            servicePath1.Close();
 
             RegistryKey servicePath3 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\DataCollection", true);
             if (servicePath3.GetValue("AllowTelemetry") != null)
@@ -136,6 +132,14 @@ namespace GameModeWin
             }
             servicePath3.Close();
 
+            //remove datacollection settings, that can disable some feedback for windows
+
+            RegistryKey servicePath4 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
+            if (servicePath4.GetValue("DataCollection") != null)
+            {
+                servicePath4.DeleteValue("DataCollection");
+            }
+            servicePath4.Close();
 
 
         }

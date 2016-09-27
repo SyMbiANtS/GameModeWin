@@ -169,7 +169,7 @@ namespace GameModeWin
         {
             RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
 
-            servicePath1.SetValue("Start", 3);
+            servicePath1.SetValue("Start", 2);
             servicePath1.Close();
 
         }
