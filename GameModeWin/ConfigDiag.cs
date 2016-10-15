@@ -128,7 +128,7 @@ namespace GameModeWin
             RegistryKey servicePath3 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows\\DataCollection", true);
             if (servicePath3.GetValue("AllowTelemetry") != null)
             {
-                servicePath3.DeleteValue("AllowTelemetry");
+                servicePath3.SetValue("AllowTelemetry", 1);
             }
             servicePath3.Close();
 
@@ -137,7 +137,7 @@ namespace GameModeWin
             RegistryKey servicePath4 = Registry.CurrentUser.OpenSubKey("Software\\Policies\\Microsoft\\Windows", true);
             if (servicePath4.GetValue("DataCollection") != null)
             {
-                servicePath4.DeleteValue("DataCollection");
+                servicePath4.SetValue("DataCollection", 2);
             }
             servicePath4.Close();
 
