@@ -56,23 +56,38 @@ namespace GameModeWin
 
         public void defLocalOverON()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection", true);
-            
-            servicePath.SetValue("LocalSettingOverrideDisableBehaviorMonitoring", 1);
-            servicePath.SetValue("LocalSettingOverrideDisableOnAccessProtection", 1);
-            servicePath.SetValue("LocalSettingOverrideDisableRealtimeMonitoring", 1);
-            servicePath.SetValue("LocalSettingOverrideRealtimeScanDirection", 1);
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
+
+            if (servicePath.OpenSubKey("Real-Time Protection") == null)
+            {
+                servicePath.Close();
+                RegistryKey sp = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
+                sp = sp.CreateSubKey("Real-Time Protection");
+
+                sp.Close();
+                servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection", true);
+            }
+
+            servicePath.SetValue("DisableBehaviorMonitoring", 1);
+            servicePath.SetValue("DisableOnAccessProtection", 1);
+            servicePath.SetValue("DisableRealtimeMonitoring", 1);
+       ///  servicePath.SetValue("LocalSettingOverrideRealtimeScanDirection", 1);
             servicePath.Close();
         }
 
         public void defLocalOverOFF()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection", true);
-        
-            servicePath.DeleteValue("LocalSettingOverrideDisableBehaviorMonitoring");
-            servicePath.DeleteValue("LocalSettingOverrideDisableOnAccessProtection");
-            servicePath.DeleteValue("LocalSettingOverrideDisableRealtimeMonitoring");
-            servicePath.DeleteValue("LocalSettingOverrideRealtimeScanDirection");
+            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
+
+            if (servicePath.OpenSubKey("Real-Time Protection") != null)
+            {
+                servicePath.DeleteSubKey("Real-Time Protection");
+            }
+
+        ///    servicePath.DeleteValue("DisableBehaviorMonitoring");
+        ///    servicePath.DeleteValue("DisableOnAccessProtection");
+        ///    servicePath.DeleteValue("DisableRealtimeMonitoring");
+        /// servicePath.DeleteValue("LocalSettingOverrideRealtimeScanDirection");
             servicePath.Close();
         }
 
