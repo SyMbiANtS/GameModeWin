@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace GameModeWin
 {
@@ -143,6 +144,77 @@ namespace GameModeWin
 
 
         }
+
+
+        /// <summary>
+        /// Disable DiagnosticTracking
+        /// </summary>
+
+        public void disDiag()
+        {
+            RegistryKey servicePath11 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
+
+            servicePath11.SetValue("Start", 4);
+            servicePath11.Close();
+
+        }
+
+        /// <summary>
+        /// Enable Diag
+        /// </summary>
+        public void enDiag()
+        {
+            RegistryKey servicePath11 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
+
+            servicePath11.SetValue("Start", 2);
+            servicePath11.Close();
+
+        }
+
+        /// <summary>
+        /// Start stop Telemetry Service
+        /// schtasks.exe /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
+        /// </summary>
+        /// 
+
+
+        public void execStopTelemetry(bool exeComm)
+        {
+            String newEx = "Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser";
+            String exCom = "Disable";
+
+            if (exeComm == false)
+            {
+                exCom = "Enable";
+            }
+
+            Process proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "schtasks.exe ",
+                    Arguments = "/Change /TN \"" + newEx + "\" /" + exCom + "",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            };
+
+
+            proc.Start();
+
+        }
+
+        public void stopTelemetry()
+        {
+            execStopTelemetry(true);
+        }
+
+        public void startTelemetry()
+        {
+            execStopTelemetry(false);
+        }
+
 
 
         /// <summary>

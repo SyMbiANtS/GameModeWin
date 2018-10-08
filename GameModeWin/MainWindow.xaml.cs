@@ -89,7 +89,8 @@ namespace GameModeWin
                     if (cb111.IsChecked == true)
                     {
                         cfd.disableTelemtry();
-                        csrv.disDiag();
+                        cfd.disDiag();
+                        cfd.stopTelemetry();
                     }
                     if (cb112.IsChecked == true)
                     {
@@ -177,7 +178,8 @@ namespace GameModeWin
                     if (cb211.IsChecked == true)
                     {
                         cfd.telemetryOn();
-                        csrv.enDiag();
+                        cfd.enDiag();
+                        cfd.startTelemetry();
                     }
                     if (cb212.IsChecked == true)
                     {
@@ -239,6 +241,35 @@ namespace GameModeWin
                 keySettings.SetValue("Cortana", "1");
                 keySettings.SetValue("netOpt", "1");
                 keySettings.SetValue("appCompat", "1");
+                keySettings.SetValue("GM", "0");
+
+            }
+
+            ///TODO
+            ///This origin subkey is for later update to read first values, that have been set in system
+            ///now just setzero and make it TODO
+
+            keySettings.OpenSubKey("System\\GameConfigStore", true);
+            if (keySettings.OpenSubKey("Original") == null)
+            {
+                keySettings.CreateSubKey("Original");
+
+                keySettings = Registry.CurrentUser.OpenSubKey("System\\GameConfigStore\\Original", true);
+
+                keySettings.SetValue("Superfetch", "0");
+                keySettings.SetValue("udpCache", "0");
+                keySettings.SetValue("tcpParam", "0");
+                keySettings.SetValue("tcpNoDelay", "0");
+                keySettings.SetValue("TimeBroker", "0");
+                keySettings.SetValue("Notification", "0");
+                keySettings.SetValue("WinUpdate", "0");
+                keySettings.SetValue("Defender", "0");
+                keySettings.SetValue("LocalOverride", "0");
+                keySettings.SetValue("indexing", "0");
+                keySettings.SetValue("Telemetry", "0");
+                keySettings.SetValue("Cortana", "0");
+                keySettings.SetValue("netOpt", "0");
+                keySettings.SetValue("appCompat", "0");
                 keySettings.SetValue("GM", "0");
 
             }
@@ -536,7 +567,7 @@ namespace GameModeWin
 
         private void SymbLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://devel.symbiants.com");
+            System.Diagnostics.Process.Start("http://dev.symbiants.com");
         }
 
         private void SpeedLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)

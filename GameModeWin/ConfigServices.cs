@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
+
 namespace GameModeWin
 {
     public class ConfigServices
@@ -15,18 +16,18 @@ namespace GameModeWin
 
         public void setTime()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\TimeBrokerSvc", true);
+            RegistryKey servicePath01 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\TimeBrokerSvc", true);
 
-            servicePath.SetValue("Start", 4);
-            servicePath.Close();
+            servicePath01.SetValue("Start", 4);
+            servicePath01.Close();
         }
 
         public void unsetTime()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\TimeBrokerSvc", true);
+            RegistryKey servicePath01 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\TimeBrokerSvc", true);
 
-            servicePath.SetValue("Start", 3);
-            servicePath.Close();
+            servicePath01.SetValue("Start", 3);
+            servicePath01.Close();
         }
 
         /// <summary>
@@ -35,18 +36,23 @@ namespace GameModeWin
 
         public void defenderOff()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
+            RegistryKey servicePath02 = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
 
-            servicePath.SetValue("DisableAntiSpyware", 1);
-            servicePath.Close();
+            if (servicePath02.GetValue("DisableAntiSpyware") != null)
+            {
+                servicePath02.SetValue("DisableAntiSpyware", 1);
+            }
+            servicePath02.Close();
         }
 
         public void defenderOn()
         {
-            RegistryKey servicePath = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
-
-            servicePath.DeleteValue("DisableAntiSpyware");
-            servicePath.Close();
+            RegistryKey servicePath02 = Registry.LocalMachine.OpenSubKey("Software\\Policies\\Microsoft\\Windows Defender", true);
+            if (servicePath02.GetValue("DisableAntiSpyware") != null)
+            { 
+                 servicePath02.DeleteValue("DisableAntiSpyware");
+            }
+            servicePath02.Close();
         }
 
 
@@ -165,28 +171,6 @@ namespace GameModeWin
 
             servicePath.DeleteValue("AutoDownload");
             servicePath.Close();
-        }
-
-        /// <summary>
-        /// Disable DiagnosticTracking
-        /// </summary>
-
-        public void disDiag()
-        {
-            RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
-
-            servicePath1.SetValue("Start", 4);
-            servicePath1.Close();
-
-        }
-
-        public void enDiag()
-        {
-            RegistryKey servicePath1 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
-
-            servicePath1.SetValue("Start", 2);
-            servicePath1.Close();
-
         }
 
 
