@@ -148,6 +148,10 @@ namespace GameModeWin
 
         /// <summary>
         /// Disable DiagnosticTracking
+        /// this has been changed from  System\\CurrentControlSet\\Services\\DiagTrack
+        /// to SYSTEM\CurrentControlSet\Services\diagsvc + SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service
+        /// default start is 3 , now disabled in telemetry function
+        /// will be moved to other function, but not sure if it is needed
         /// </summary>
 
         public void disDiag()
@@ -166,7 +170,7 @@ namespace GameModeWin
         {
             RegistryKey servicePath11 = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Services\\DiagTrack", true);
 
-            servicePath11.SetValue("Start", 2);
+            servicePath11.SetValue("Start", 3);
             servicePath11.Close();
 
         }

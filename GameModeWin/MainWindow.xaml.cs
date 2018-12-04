@@ -89,7 +89,7 @@ namespace GameModeWin
                     if (cb111.IsChecked == true)
                     {
                         cfd.disableTelemtry();
-                        cfd.disDiag();
+                        
                         cfd.stopTelemetry();
                     }
                     if (cb112.IsChecked == true)
@@ -178,7 +178,7 @@ namespace GameModeWin
                     if (cb211.IsChecked == true)
                     {
                         cfd.telemetryOn();
-                        cfd.enDiag();
+                        
                         cfd.startTelemetry();
                     }
                     if (cb212.IsChecked == true)
